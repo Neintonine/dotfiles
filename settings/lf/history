@@ -1,0 +1,312 @@
+: cd D
+$ cd D:/
+$ rm FarukolsArmor.nif
+$ del FarukolsArmor.nif
+$ rename FarukolsArmor.nif.~1~ FarukolsArmor.nif
+: doc
+: quit
+: C
+: edit-config
+: edit-config
+: edit-config
+: info
+: doc
+: doc
+: paste
+: doc
+: cd ./AppData
+$ curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/lfrc.example -o ./lfrc
+$ curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/lfrc.cmd.example -o ./lfrc
+: doc
+: cd E
+: cd D;/
+: cd D:\
+: doc
+% mkdir le funny
+% mkdir A Folder
+% title funny
+$ echo "\033]0; $PWD\007"
+! echo "\033]0; $PWD\007"
+! echo $PWD
+! echo %PWD%
+$ title "%PWD%"
+: cd D:
+: cd D;/
+: cd D:
+: cd D:/
+: cd E:/
+: cd E:/
+: cd D:/
+: cd C:\\Users\\miche\\Desktop\\
+: cd E:/
+: cd E:/
+: cd D:
+: cd D
+: D:/
+: cd D:/
+: cd E:\\Mod\ Creation\\Skyrim\ SE\\DSA\ Characters\\src\\meshes\\
+: delete FarukolsArmor.nif 
+: doc
+: doc
+: paste
+: cd AppData\\Local\\
+: share 2023-04-05 17-44-17.mkv
+: share 2023-04-05\ 17-44-17.mp4
+: share 2023-04-05\ 17-44-17.mp4
+: share 2023-04-05\ 17-44-17.mp4
+! curl -F"file=@$fx" https://0x0.st | clip.exe
+! curl -F"file=2023-02-26 01-33-52.mkv" https://0x0.st | clip.exe
+! curl -F"file=@.\\2023-02-26 01-33-52.mkv" https://0x0.st | clip.exe
+! curl -F"file=@2023-02-26 01-33-52.mkv" https://0x0.st | clip.exe
+! curl -F"file=@./2023-02-26 01-33-52.mkv" https://0x0.st | clip.exe
+! curl -F"file=@C:/users/miche/Videos/2023-02-26 01-33-52.mkv" https://0x0.st | clip.exe
+! curl -F"file=@C:\\users\\miche\\Videos\\2023-02-26 01-33-52.mkv" https://0x0.st | clip.exe
+: share
+: share
+: share
+! curl -F"file=@%fx%" https://0x0.st | clip.exe
+: share
+! %fx%
+! echo %fx%
+: share
+: share
+: share
+: share
+: share
+: share
+: share
+: share
+: cd D:/
+: delete
+: cd Z:/
+$ ssh pi@192.168.178.23
+$ ssh pi@192.168.178.23
+: cd D:/
+$ ssh pi@192.168.178.23
+$ ssh pi@192.168.178.23
+$ ssh pi@192.168.178.23
+: cd Z:/
+$ ssh root@h2995861.stratoserver.net
+: editor
+: E
+: e
+: doc
+: doc
+: doc
+: dco
+: cd ~\\Downloads\\
+: find Wall
+: cd ./AppData
+: cd AppData\\
+: extract
+: extract
+: search omega
+: search omeag
+: extract
+: extract
+: extract
+: doc
+: cd E:/
+: cd Z:/
+: cd Y:/
+: ~/Down
+: cd ~\\Downloads\\
+: extract
+: cd Z:/
+: cd ~\\AppData\\
+: move
+: doc
+: cd ~\\AppData\\Local\\lf\\
+: open
+: cd ~\\AppData\\Local\\lf\\
+% mkdir tools
+: dowloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: reload-config
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: reload-config
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: reload-config
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadfile https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: downloadFile
+: cd ~\\AppData\\Local\\lf\\
+: delete
+: open download.js
+: doc
+: cd ~\\AppData\\Local\\lf\\
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe ./file.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe D:/file.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: download https://raw.githubusercontent.com/rostok/file2clip/master/file2clip.cs
+: download https://raw.githubusercontent.com/rostok/file2clip/master/file2clip.cs
+: mkfile hello.txt
+: delete
+: cd ~\\AppData\\Local\\lf\\tools\\
+: mkfile download.js
+: cd E:/
+: download https://raw.githubusercontent.com/rostok/file2clip/master/file2clip.cs
+: download https://raw.githubusercontent.com/rostok/file2clip/master/file2clip.cs
+: cd %LOCALAPPDAT%
+: cd ~\\AppData\\Local\\lf
+: download https://github.com/rostok/file2clip/raw/master/file2clip.exe
+: cd E:/
+: download https://raw.githubusercontent.com/Neintonine/file2clip/master/file2clip.cs
+: mkdir git
+$ mkdir git
+$ git clone https://github.com/Neintonine/file2clip.git
+$ git commit -m "Did some slight refactoring and added a console writeline at the bottom"
+! git status
+: w
+: cd ~\\AppData\\Local\\lf\\tools\\
+: cd E:/
+: cd Z:/
+: file-context-copy
+: cd Z:/
+: cd E:/
+: cd ~\\AppData\\Local\\lf\\
+: cd D:/
+: cd Z:/
+: extract
+: extract
+: cd Z:/
+: cd Z:/
+: cd ~\\AppData\\Local\\lf\\
+: cd Z:/
+: delete
+% explorer
+: cd C:\Users\miche\AppData\Roaming\JetBrains\Rider2023.1\resharper-host
+: cd C:\\Users\\miche\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host
+: cd ~
+: mkdir ".ideavimrc"
+: mkfile .ideavimrc
+: mkdir CheatChests
+$ mkdir CheatChests
+: mkfile pack.mcmeta
+: mkdir functions
+$ mkdir minecraft
+$ mkdir data
+$ mkdir cheatchests
+: functions
+$ mkdir functions
+$ mkdir tags
+$ explorer
+: extract
+: cd ~\\AppData\\Local\\lf\\
+: extract
+: cd ~\\AppData\\Local\\lf\\
+: cd Z:/
+$ ssh root@h2995861.stratoserver.net
+$ ssh root@h2995861.stratoserver.net
+$ ssh root@h2995861.stratoserver.net
+$ ssh root@192.168.178.23
+$ ssh pi@192.168.178.23
+$ ssh pi@192.168.178.23
+$ clear
+$ ssh pi@192.168.178.23
+$ ssh pi@192.168.178.23
+: cd E:/
+$ git clone https://github.com/BratPfanneTV/Custom-MGUI.git
+$ git clone https://github.com/BratPfanneTV/Orpticon.MonoGameSystems.git
+$ git clone https://github.com/BratPfanneTV/YAHG2.git
+$ editor %fs%
+: cd E:/
+! vagrant up
+! vagrant destroy
+! vagrant up
+: cd E:\\PHP\\
+: w
+: cd E:/
+$ notepad %fs%
+$ notepad $fs
+$ notepad Vagrantfile 
+: cd E:/
+$ vagrant up
+! vagrant up
+: cd E:/
+$ notepad Vagrantfile 
+! vagrant reload
+: cd Z:\
+: cd Z:/
+: cd D:/
+: cd E:/
+: cd E:/
+$ vagrant up
+: cd E:\\PHP\\website\\src\\php\\
+$ vagrant shh
+$ vagrant ssh
+$ vagrant reload
+$ vagrant ssh
+: cd E:\\PHP\\_vagrants\\website\\
+$ vagrant halt
+: cd E:\\PHP\\_vagrants\\website\\
+% vagrant up
+: debug
+: doc
+% vagrant up
+: cd E:/
+% vagrant up
+$ vagrant halt
+: cd E:
+: cd E:\\PHP\\_vagrants\\website\\
+$ vagrant up
+: cd E:\\PHP\\_vagrants\\website\\
+$ vagrant up
+$ composer require ralouphie/mimey
+: cd Z:/
+$ ssh root@h2995861.stratoserver.net
+$ ssh root@h2995861.stratoserver.net
+$ ssh root@h2995861.stratoserver.net
+$ ssh root@h2995861.stratoserver.net
+: cd E;/
+: cd E:\
+: cd E:?
+: cd E:/
+: cd E:\\PHP\\_vagrants\\website\\
+$ vagrant up
+$ ssh root@h2995861.stratoserver.net
+: cd D:/
+: cd E:\\PHP\\_vagrants\\
+$ vagrant halt
+$ explorer
+: cd D:\
+: cd D:\\SteamLibrary\\steamapps\\common\\YAHG\\
+$ notepad tmp
+$ notepad savedata.xml
+$ notepad savedata.xml
+$ notepad savedata.xml
+$ notepad savedata.xml
+$ notepad savedata.xml
+: cd E:\\PHP\\_vagrants\\website\\
+$ vagrant up
+$ ssh root@h2995861.stratoserver.net
+: cd AppData\\
+: cd AppData\\
+: cd D:/
+$ notepad savedata.xml 
+: cd E:/
+$ mkdir ObsidianPages
+: doc
+: cd C:/
+: cd AppData\\
+$ nano
+: delete
+: delete
