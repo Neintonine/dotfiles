@@ -323,3 +323,28 @@ $ echo %EDITOR%
 $ echo $EDITOR
 ! echo $EDITOR
 ! $EDITOR
+! $EDITOR
+! Get-Command
+: mkdir Hello
+: touch Hello.txt
+: doc
+! $PAGER
+! echo $PAGER
+! Write-Host $PAGER
+: doc
+! #f
+! Write-Host $fs
+! EDITOR
+! $EDITOR
+! Write-Host $EDITOR
+! $env
+! Write-Host $env:EDITOR
+! Write-Host $env:EDITOR
+: doc
+! Write-Host $env:SHELL
+! Write-Host $env
+! Write-Host $env:EDITOR
+% Write-Host $env:SHELL
+% Write-Host $env:EDITOR
+% Write-Host $env:EDITOR
+% Write-Host $env:PAGER
