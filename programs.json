@@ -1,0 +1,27 @@
+{
+    "winget": [
+        "gokcehan.lf",
+        "Mozilla.Firefox",
+        "Discord.Discord",
+        "Bitwarden.Bitwarden",
+        "ShareX.ShareX",
+        "7zip.7zip",
+        "Microsoft.WindowsTerminal",
+        "Notepad++.Notepad++",
+        "OBSProject.OBSStudio",
+        "Valve.Steam",
+        "JetBrains.Toolbox",
+        "Unity.UnityHub",
+        "DeepL.DeepL",
+        "WinSCP.WinSCP",
+        "BlenderFoundation.Blender",
+        "Hashicorp.Vagrant",
+        "Logitech.GHUB",
+        "Oracle.VirtualBox",
+        "Microsoft.PowerToys",
+        "Obsidian.Obsidian"
+    ],
+    "choco": [
+        "nano"
+    ]
+}
