@@ -54,10 +54,27 @@ function setupLinks() {
     Write-Progress -Completed True
 }
 
+function runPostInstall() {
+    $postInstallScripts = Get-Content ".\post-install-scripts.json" | ConvertFrom-Json
+    foreach ($script in $postInstallScripts) {
+        $scriptPath = "./scripts/$script"
+        $completePath = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $scriptPath));
+
+        if (![System.IO.File]::Exists($completePath)) {
+            continue;
+        }
+        
+        Write-Progress -Activity "Process Post-Install..." -CurrentOperation "Current Script: $script"
+        & $completePath
+        
+    }
+    Write-Progress -Completed True
+}
+
 Write-Host "# Starting Setup"
 
 installPrograms
-
 setupLinks
+runPostInstall
 
 Write-Host "# Setup Complete"
