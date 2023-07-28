@@ -310,3 +310,16 @@ $ mkdir ObsidianPages
 $ nano
 : delete
 : delete
+: cd E:\\PHP\\website\\
+$ nano tsconfig.json 
+: delete
+: cd E:\\PHP\\website\\
+: doc
+$ echo %EDITOR%
+! echo %EDITOR%
+: reload-config
+: doc
+: reload-config
+$ echo $EDITOR
+! echo $EDITOR
+! $EDITOR

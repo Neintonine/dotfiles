@@ -1,5 +1,5 @@
 # interpreter for shell commands
-set shell cmd
+set shell powershell
 
 # Shell commands with multiline definitions and/or positional arguments and/or
 # quotes do not work in Windows. For anything but the simplest shell commands,
@@ -11,16 +11,16 @@ set shell cmd
 # mapping uses 'notepad' which launches in a separate GUI window. You may
 # instead install a terminal editor of your choice and replace the default
 # editor keybinding accordingly.
-map e $vim %f%
+map e $nano $f
 
 # change the pager used in default pager keybinding
 # The standard pager used in Windows is 'more' which is not a very capable
 # pager. You may instead install a pager of your choice and replace the default
 # pager keybinding accordingly.
-map i $less %f%
+map i $less $f
 
 # change the shell used in default shell keybinding
-map w $powershell
+map w $$SHELL
 
 # change 'doc' command to use a different pager
 cmd doc $lf -doc | less
@@ -33,30 +33,29 @@ map <enter> shell
 map <delete> delete
 
 cmd reload-config ${{
-    lf -remote "send %id% source ~/.config/lf/lfrc"
+	$EDITOR ~/.config/lf/lfrc
+    lf -remote "send $id source ~/.config/lf/lfrc"
 }}
 
 set drawbox
 
 cmd mkdir %IFS=" "; mkdir
-cmd mkfile $type nul >> 
+cmd touch %type nul >> 
 map <c-n> push :mkdir<space>
+map <c-N> push :touch<space>
 
 set info size:time
 
 cmd cd $cd "$*"
 
 cmd share !{{
-	echo %fx%
+	echo $fx
 }}
 
-cmd extract !%LOCALAPPDATA%/lf/tools/extract.cmd %f%
+cmd extract !%LOCALAPPDATA%/lf/tools/extract.cmd $f
 cmd download @node %LOCALAPPDATA%/lf/tools/download.js
 
-cmd file-copy @node %LOCALAPPDATA%/lf/tools/clipFile.js %f% --always-as-file
+cmd file-copy @node %LOCALAPPDATA%/lf/tools/clipFile.js $f --always-as-file
 map <c-c> file-copy
-cmd file-context-copy @node %LOCALAPPDATA%/lf/tools/clipFile.js %f%
+cmd file-context-copy @node %LOCALAPPDATA%/lf/tools/clipFile.js $f
 map <c-x> file-context-copy
-
-cmd notepad %f%
-map 
