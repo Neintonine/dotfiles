@@ -1,4 +1,16 @@
 #Requires -RunAsAdministrator
+param(
+    [bool]$runInstall,
+    [bool]$runLinks,
+    [bool]$runPostInstall
+)
+
+if (!$runInstall -and !$runLinks -and !$runPostInstall) {
+    $runInstall = $true;
+    $runLinks = $true;
+    $runPostInstall = $true;
+}
+
 function installPrograms() {
     $programs = Get-Content "programs.json" | ConvertFrom-Json
 
@@ -73,8 +85,16 @@ function runPostInstall() {
 
 Write-Host "# Starting Setup"
 
-installPrograms
-setupLinks
-runPostInstall
+if ($runInstall) {
+    installPrograms
+}
+
+if ($runLinks) {
+    setupLinks
+}
+
+if ($runPostInstall) {
+    runPostInstall
+}
 
 Write-Host "# Setup Complete"
