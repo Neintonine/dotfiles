@@ -61,7 +61,7 @@ function setupLinks() {
     }
 }
 
-#installPrograms
+installPrograms
 
 Write-Host "# -----------------"
 
