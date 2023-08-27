@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE niftoolsxml>
+<niftoolsxml version="0.7.1.0">
+
+	<token name="verexpr" attrs="vercond">
+
+		<verexpr token="#DLA#" string="(#VER# #EQ# 257)">DLA</verexpr>
+		<verexpr token="#PC#" string="(#VER# #EQ# 257)">PC</verexpr>
+		<verexpr token="#JWE#" string="(#VER# #EQ# 258)">JWE1</verexpr>
+		<verexpr token="#PZ#" string="(#VER# #EQ# 260)">PZ all</verexpr>
+		<verexpr token="#JWE2#" string="(#VER# #EQ# 262)">JWE2</verexpr> 
+		<verexpr token="#JWE2_DEV#" string="(#VER# #EQ# 261)">JWE2</verexpr>
+	</token>
+
+	<token name="global" attrs="vercond access">
+        Global Tokens.
+        NOTE: These must be listed after the above tokens so that they replace last. For example, `verexpr` uses these tokens.
+        <global token="#VER#" string="version" />
+    </token>
+
+	<xi:include href="../ovl_base/ovl_base.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(*/*)" />
+
+<!--    <version id="old" version="257" >Old</version>-->
+    <version id="DLA" version="257" >DLA</version>
+<!--    <version id="ZTUAC" version="257" >ZTUAC</version>-->
+    <version id="PC" version="257" >PC</version>
+    <version id="JWE1" version="258" >JWE1</version>
+    <version id="PZ" version="260" >PZ</version>
+    <version id="JWE2_DEV" version="261" >JWE2 Dev Build</version>
+    <version id="JWE2" version="262" >JWE2</version>
+
+    <basic name="Channelname" integral="true" countable="true">
+		<!--    PC uses ushort-->
+		<!--    JWE uses uint-->
+    </basic>
+
+    <compound name="ManisRoot">
+		24 bytes for DLA, ZTUAC, PC, JWE1, old PZ
+		32 bytes for PZ1.6+, JWE2
+		<add name="names size" type="ushort">seemingly related to the names of mani files stripped from their prefix, but usually slightly smaller than what is actually needed</add>
+        <add name="hash block size" type="ushort"/>
+		<add name="zero 0" type="uint"/>
+        <add name="zero 1" type="uint64" />
+        <add name="zero 2" type="uint64" />
+        <add name="zero 3" type="uint64" since="260" />
+    </compound>
+
+	<compound name="ManiInfo" >
+        288 bytes for JWE / PZ
+        304 bytes for PC
+        <add name="duration" type="float"/>
+		<add name="FrameCount" type="uint"/>
+		<add name="b" type="uint" >?</add>
+		<add name="zeros 0 " type="ushort" arr1="6"/>
+		<add name="extra pc 1" type="ushort" until="257"> </add>
+		<add name="PosBoneCount" type="ushort"/>
+		<add name="OriBoneCount" type="ushort"/>
+		<add name="SclBoneCount" type="ushort" >likely</add>
+		<add name="extra pc" type="uint64" until="257">zero</add>
+		<add name="PosBoneCount Repeat" type="ushort" until="257"/>
+		<add name="OriBoneCount Repeat" type="ushort" until="257"/>
+		<add name="SclBoneCount Repeat" type="ushort" until="257"> </add>
+		<add name="zeros 1" type="ushort" />
+		<add name="zeros 1 new" type="uint" since="258"/>
+		<add name="FloatCount" type="ushort" > </add>
+		<add name="count a" type="ubyte">FF if unused</add>
+		<add name="count b" type="ubyte">FF if unused</add>
+		<add name="target bone count" type="ushort" >usually matches ms2 bone count, at least for JWE2 dinos. Doesn't match for PZ water wheel 5 vs ms2 2</add>
+		<add name="g" type="ushort" >zero</add>
+		<add name="zeros 2" type="uint" arr1="57" > rest 228 bytes </add>
+		<add name="extra zeros pc" type="ushort" arr1="6" until="257" > rest 14 bytes </add>
+		<add name="PosBoneMin" type="ubyte"/>
+		<add name="PosBoneMax" type="ubyte"/>
+		<add name="OriBoneMin" type="ubyte"/>
+		<add name="OriBoneMax" type="ubyte"/>
+		<add name="SclBoneMin" type="byte" >always FF</add>
+		<add name="SclBoneMax" type="byte" >always 00</add>
+		<add name="PosBoneCount Related" type="ubyte" since="258" > </add>
+		<add name="PosBoneCount Repeat" type="ubyte" since="258"/>
+		<add name="OriBoneCount Related" type="ubyte" since="258" > </add>
+		<add name="OriBoneCount Repeat" type="ubyte" since="258"/>
+		<add name="SclBoneCount Related" type="byte" since="258" >maybe, not observed yet</add>
+		<add name="SclBoneCount Repeat" type="byte" since="258"/>
+		<add name="zeros end" type="ushort" since="258" > </add>
+		<add name="zero 2 end" type="ushort"> </add>
+    </compound>
+
+    <compound name="Buffer1">
+		<add name="bone hashes" type="uint" arr1="#ARG#"/>
+		<add name="bone names" type="ZString" arr1="#ARG#"/>
+		<add name="bone pad" type="PadAlign" template="bone names" arg="4"/>
+    </compound>
+
+    <compound name="KeysReader">
+    </compound>
+
+    <compound name="InfoHeader">
+        Custom header struct
+        <add name="version" type="uint"/>
+        <add name="mani count" type="uint"/>
+        <add name="names" type="ZString" arr1="mani count"/>
+        <add name="header" type="ManisRoot"/>
+        <add name="mani infos" type="ManiInfo" arr1="mani count"/>
+        <add name="name buffer" type="Buffer1" arg="header\hash block size / 4"/>
+        <add name="keys buffer" type="KeysReader" arg="mani infos"/>
+    </compound>
+
+	<compound name="Vector3" size="12">
+		A vector in 3D space (x,y,z).
+		<field name="x" type="float">First coordinate.</field>
+		<field name="y" type="float">Second coordinate.</field>
+		<field name="z" type="float">Third coordinate.</field>
+	</compound>
+
+	<compound name="Vector4H" size="8">
+		<field name="w" type="normshort"/>
+		<field name="x" type="normshort"/>
+		<field name="y" type="normshort"/>
+		<field name="z" type="normshort"/>
+	</compound>
+
+	<compound name="UncompressedManiData" >
+		<add name="PosBones" type="Vector3" arr1="#ARG#\PosBoneCount" arr2="#ARG#\FrameCount" />
+		<add name="OriBones" type="Vector4H" arr1="#ARG#\OriBoneCount" arr2="#ARG#\FrameCount" />
+		<add name="Floats" type="float" arr1="#ARG#\FloatCount" arr2="#ARG#\FrameCount" />
+    </compound>
+
+    <compound name="FloatsGrabber" >
+    </compound>
+
+    <compound name="Repeat" >
+		<add name="zeros 0" type="uint64" arr1="7" > </add>
+		<add name="byte size" type="uint64" >to be read sequentially starting after this array </add>
+		<add name="zeros 1" type="uint64" arr1="2" > </add>
+    </compound>
+	
+	<compound name="CompressedManiData" >
+		<add name="ref" type="Empty"/>
+		<add name="floatsa" type="float" arr1="#ARG#\FrameCount" arr2="#ARG#\FloatCount" >these are likely a scale reference or factor</add>
+
+<!--		two uint zeros, or padding-->
+		<add name="pad 2" type="SmartPadding" >?</add>
+<!--	<add name="zero" type="uint64" cond="(#ARG#\FloatCount) #GT# (0)"> </add>-->
+
+		<add name="FrameCount" type="uint"/>
+		<add name="OriBoneCount" type="uint"/>
+		<add name="PosBoneCount" type="uint"/>
+		<add name="SclBoneCount" type="uint" >maybe</add>
+		<add name="zeros 18" type="uint" arr1="18">fixed</add>
+		<add name="count" type="ushort" > </add>
+		<add name="QuantisationLevel" type="ushort" >usually 420, or 0</add>
+		<add name="ref2" type="Empty" > </add>
+		<add name="some indices" type="ubyte" arr1="PosBoneCount" > </add>
+		<add name="flag 0" type="ubyte" > </add>
+		<add name="flag 1" type="ubyte" > </add>
+		<add name="flag 2" type="ubyte" > </add>
+		<add name="flag 3" type="ubyte" > </add>
+<!--		<add name="some indices" type="ubyte" arr1="PosBoneCount" > </add>-->
+		<add name="anoth pad" type="PadAlign" template="ref2" arg="4" > </add>
+<!--		<add name="anoth pad" type="SmartPadding" >?</add>-->
+<!--        <add name="pad to 8" type="ubyte" arr1="(8 - (count  % 8)) % 8" > </add>-->
+
+		<add name="floatsb" type="FloatsGrabber" >these are likely a scale reference or factor</add>
+	<!-- <add name="floatsb" type="float" arr1="12" vercond="#JWE2#">these are likely a scale reference or factor</add> -->
+	<!-- <add name="floatsb" type="float" arr1="6" vercond="#PZ#">these are likely a scale reference or factor</add> -->
+		<!-- <add name="floats second" type="float" arr1="flag 1" arr2="6"  >these are likely a scale reference or factor</add> -->
+		<!-- <add name="floats third" type="float" arr1="6" vercond="#PZ#" cond="flag 2 #GT# 1" >these are likely a scale reference or factor</add> -->
+
+<!--		<add name="floats 2" type="float" arr1="3" arr2="6"  >these are likely a scale reference or factor</add>-->
+
+<!--		<add name="unk" type="uint64" cond="#ARG#\count_a #EQ# 255">present in feeder, not in dino</add> -->
+
+		<add name="extra pc zero" type="uint64" until="257" >this seems to be vaguely related, but not always there?</add>
+<!--		<add name="unk for FloatCount" type="uint64" cond="#ARG# \ FloatCount">this seems to be vaguely related, but not always there?</add>-->
+<!--		<add name="floats extra" type="float" arr1="#ARG#\FloatCount" >nope likely wrong</add>-->
+		<add name="anoth pad2" type="PadAlign" template="ref" arg="16" > </add>
+		<add name="ref3" type="Empty"/>
+		<add name="repeats" type="Repeat" arr1="count" > </add>
+	</compound>
+
+	<compound name="ManiBlock" >
+		<add name="ref" type="Empty"/>
+		define the channel names
+		<add name="PosBones" type="Channelname" arr1="#ARG#\PosBoneCount"/>
+		<add name="OriBones" type="Channelname" arr1="#ARG#\OriBoneCount"/>
+		<add name="SclBones" type="Channelname" arr1="#ARG#\SclBoneCount"/>
+		<add name="Floats" type="Channelname" arr1="#ARG#\FloatCount"/>
+
+		the following are probably used to map bones in the skeleton
+		<add name="PosBones P" type="ubyte" arr1="#ARG#\PosBoneCount"/>
+		<add name="OriBones P" type="ubyte" arr1="#ARG#\OriBoneCount"/>
+		<add name="SclBones P" type="ubyte" arr1="#ARG#\SclBoneCount"/>
+		<add name="PosBones delta" type="ubyte" arr1="(#ARG#\PosBoneMax - #ARG#\PosBoneMin) + 1" cond="#ARG#\PosBoneMin #GTE# 0"> </add>
+		<add name="OriBones delta" type="ubyte" arr1="(#ARG#\OriBoneMax - #ARG#\OriBoneMin) + 1" cond="#ARG#\OriBoneMin #GTE# 0"> </add>
+		<add name="SclBones delta" type="ubyte" arr1="(#ARG#\SclBoneMax - #ARG#\SclBoneMin) + 1" cond="#ARG#\SclBoneMin #GTE# 0"> </add>
+
+		<add name="pad" type="PadAlign" template="ref" arg="4"/>
+		<add name="KeyData" type="UncompressedManiData" arg="#ARG#" cond="#ARG#\b #EQ# 0"/>
+		<add name="KeyData" type="CompressedManiData" arg="#ARG#" cond="#ARG#\b #GT# 0"/>
+    </compound>
+
+
+
+    <compound name="ChunkSizes" >
+		<add name="zeros 0" type="uint64" > </add>
+		<add name="bone" type="uint" ></add>
+		<add name="counta" type="uint" > </add>
+    </compound>
+
+    <compound name="SubChunkReader" >
+    </compound>
+	
+    <compound name="UnkChunkList" >
+		<add name="ref" type="Empty" > </add>
+		<add name="zero 0" type="SmartPadding" > </add>
+		<add name="subchunk_count" type="ushort" ></add>
+		<add name="flag" type="ushort" > </add>
+		<add name="zero 1" type="uint" > </add>
+		<add name="chunksize_list" type="ChunkSizes" arr1="subchunk_count" > </add>
+		<add name="subchunk list" type="SubChunkReader" arg="chunksize_list" > </add>
+        <add name="pad" type="PadAlign" template="ref" arg="16" >?</add>
+    </compound>
+	
+    <compound name="WeirdElementOne" >
+		<add name="float 0" type="float"> </add>
+		<add name="zero 0" type="uint" ></add>
+		<add name="floats 0" type="float" arr1="2"> </add>
+		<add name="zeros 0" type="uint64" arr1="2"> </add>
+		<add name="floats 1" type="float" arr1="3"> </add>
+		<add name="countb" type="uint"> </add>
+    </compound>
+	
+    <compound name="WeirdElementTwoReader" >
+    </compound>
+	
+    <compound name="SubChunk" >
+		arg is chunksizes
+		<add name="weird list one" type="WeirdElementOne" arr1="#ARG#\counta" >for subchunk_list[n] needs chunksize_list[n]'s counta for array length</add>
+		<add name="weird list two" type="WeirdElementTwoReader" arg="weird list one" >  needs sum of countb's from weird list one</add>
+    </compound>
+	
+    <compound name="WeirdElementTwo" >
+		<add name="many floats" type="float" arr1="7"> </add>
+    </compound>
+
+</niftoolsxml>

@@ -348,3 +348,43 @@ $ echo $EDITOR
 % Write-Host $env:EDITOR
 % Write-Host $env:EDITOR
 % Write-Host $env:PAGER
+: cd E:\\PHP\\website\\
+: doc
+: extract
+: doc
+$ less %f%
+% less %f%
+: reload-config
+: nano lfrc
+$ nano lfrc 
+: exit
+: doc
+: notepad lfrc 
+$ notepad lfrc 
+! Write-host $env:Shell
+! Write-Host $env:SHELL
+! Write-Host $env:f
+: share
+: doc
+% less
+$ less
+! less
+: shell
+$ powershell
+$ cmd
+: cd E:\\PHP\\_vagrants\\ObsidianPages\\
+$ nano Vagrantfile
+: cd E:\\PHP\\_vagrants\\website\\
+: cd E:\\PHP\\_vagrants\\ObsidianPages\\
+$ nano Vagrantfile
+$ nano Vagrantfile
+$ nano Vagrantfile
+: touch Vagrantfile
+$ vagrant ssh
+: cd Z:\\Server
+$ ssh root@h2995861.statroserver.net
+: cd D:/
+$ git https://github.com/Neintonine/optolith-client.git
+$ git clone https://github.com/Neintonine/optolith-client.git
+$ git clone --recurse-submodules https://github.com/Neintonine/optolith-client.git
+$ git clone --recurse-submodules https://github.com/Neintonine/optolith-client.git

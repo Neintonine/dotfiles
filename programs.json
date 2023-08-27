@@ -2,7 +2,9 @@
     "winget": [
         "gokcehan.lf",
         "Mozilla.Firefox",
+		"Mozilla.Thunderbird.Beta",
         "Discord.Discord",
+		"Audacity.Audacity",
         "Bitwarden.Bitwarden",
         "ShareX.ShareX",
         "7zip.7zip",
@@ -19,7 +21,11 @@
         "Logitech.GHUB",
         "Oracle.VirtualBox",
         "Microsoft.PowerToys",
-        "Obsidian.Obsidian"
+        "Obsidian.Obsidian",
+		"JanDeDobbeleer.OhMyPosh",
+		"HermannSchinagl.LinkShellExtension",
+		"Microsoft.PowerToys",
+		"REALiX.HWiNFO"
     ],
     "choco": [
         "nano"

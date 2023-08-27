@@ -1,0 +1,18 @@
+Z:\Blender\Sword.blend
+Z:\Blender\WeaponModels\F5K\Animations.blend
+Z:\Blender\WeaponModels\F5K\animation.blend
+Z:\Blender\WeaponModels\Carmel\Animations.blend
+Z:\Blender\Weapon Animations\MPX\MPX Animation.blend
+Z:\Blender\Weapon Animations\MPX\MPX Animation Inspect less Rough.blend
+Z:\Blender\Weapon Animations\MPX\MPX Animation Inspect Rough.blend
+Z:\Blender\idk\FAR-15 Animation.blend
+Z:\Blender\idk\rainbowCube.blend
+Z:\Blender\idk\rubberMat.blend
+E:\Mod Creation\Skyrim SE\DSA Characters\src\meshes\FarukolsArmor_001.blend
+Z:\Blender\idk\gun_anim.blend
+Z:\Blender\idk\glitchedCyberpunkIcon.blend
+Z:\Blender\idk\copties\noresolve-badhabits\source_001.blend
+Z:\Blender\idk\mountian.blend
+Z:\Blender\idk\copties\noresolve-badhabits\source.blend
+E:\Mod Creation\Skyrim SE\DSA Characters\src\meshes\FarukolsArmor.blend
+Z:\Blender\Presets\Low-Poly_Viewmodel_Rig_2.9.blend

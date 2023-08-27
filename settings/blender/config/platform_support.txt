@@ -1,0 +1,7 @@
+{ATI Technologies Inc./AMD Radeon RX 7900 XT/4.5.0 Core Profile Context 23.1.1.230106}=SUPPORTED
+{ATI Technologies Inc./AMD Radeon RX 7900 XT/4.5.0 Core Profile Context 23.2.2.230217}=SUPPORTED
+{ATI Technologies Inc./AMD Radeon RX 7900 XT/4.5.0 Core Profile Context 23.3.2.230315}=SUPPORTED
+{ATI Technologies Inc./AMD Radeon RX 7900 XT/4.5.0 Core Profile Context 23.4.1.230326}=SUPPORTED
+{ATI Technologies Inc./AMD Radeon RX 7900 XT/4.5.0 Core Profile Context 23.5.1.230512}=SUPPORTED
+{ATI Technologies Inc./AMD Radeon RX 7900 XT/4.5.0 Core Profile Context 23.7.1.230626}=SUPPORTED
+{ATI Technologies Inc./AMD Radeon RX 7900 XT/4.5.0 Core Profile Context 23.7.2.230718}=SUPPORTED
