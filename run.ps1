@@ -11,7 +11,18 @@ if (!$runInstall -and !$runLinks -and !$runPostInstall) {
     $runPostInstall = $true;
 }
 
+function checkForFile([string] $file) {
+    $relativeFile = './' + $file;
+    $completePath = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $relativeFile));
+    
+    return [System.IO.File]::Exists($completePath);
+}
+
 function installPrograms() {
+    if (!(checkForFile -file "programs.json")) {
+        return
+    }
+
     $programs = Get-Content "programs.json" | ConvertFrom-Json
 
     if ($programs.PSObject.Properties.name -contains "winget") {
@@ -31,7 +42,7 @@ function installPrograms() {
         if (!$chocoExists) {
             
             Write-Progress -Activity "Installing Chocolatey programs..." -CurrentOperation "Installing: Chocolatey"
-            Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) > $nul
+            Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) > $nul
         }
 
         foreach ($program in $programs.choco) {
@@ -45,6 +56,9 @@ function installPrograms() {
 }
 
 function setupLinks() {
+    if (!(checkForFile -file "links.json")) {
+        return
+    }
     $links = Get-Content "links.json" | ConvertFrom-Json
 
     foreach($link in $links.PSObject.Properties) {
@@ -56,7 +70,7 @@ function setupLinks() {
 
         Write-Progress -Activity "Create Folder Links..." -CurrentOperation "$source -> $target"
         
-        if (![System.IO.Directory]::Exists($source)) {
+        if (![System.IO.Directory]::Exists($source) -and ![System.IO.File]::Exists($source)) {
             continue;
         }
 
@@ -67,6 +81,10 @@ function setupLinks() {
 }
 
 function runPostInstall() {
+    if (!(checkForFile -file "post-install-scripts.json")) {
+        return
+    }
+
     $postInstallScripts = Get-Content ".\post-install-scripts.json" | ConvertFrom-Json
     foreach ($script in $postInstallScripts) {
         $scriptPath = "./scripts/$script"
