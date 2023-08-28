@@ -27,6 +27,26 @@ function installPrograms() {
 
     if ($programs.PSObject.Properties.name -contains "winget") {
         
+        $wingetExists = Get-Command 'winget' -ErrorAction SilentlyContinue;
+        if (!$wingetExists) {
+            Write-Progress -Activity "Installing WinGet programs..." -CurrentOperation "Installing: WinGet"
+            
+            $URL = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
+            $URL = (Invoke-WebRequest -Uri $URL).Content | ConvertFrom-Json |
+                    Select-Object -ExpandProperty "assets" |
+                    Where-Object "browser_download_url" -Match '.msixbundle' |
+                    Select-Object -ExpandProperty "browser_download_url"
+
+            # download
+            Invoke-WebRequest -Uri $URL -OutFile "Setup.msix" -UseBasicParsing
+
+            # install
+            Add-AppxPackage -Path "Setup.msix"
+
+            # delete file
+            Remove-Item "Setup.msix"
+        }
+
         foreach ($program in $programs.winget) {
             Write-Progress -Activity "Installing WinGet programs..." -CurrentOperation "Installing: $program"
 
