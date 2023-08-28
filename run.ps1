@@ -2,13 +2,18 @@
 param(
     [bool]$runInstall,
     [bool]$runLinks,
-    [bool]$runPostInstall
+    [bool]$runPostInstall,
+    [bool]$debug
 )
 
 if (!$runInstall -and !$runLinks -and !$runPostInstall) {
     $runInstall = $true;
     $runLinks = $true;
     $runPostInstall = $true;
+}
+
+if (!$PSBoundParameters.ContainsKey('debug')) {
+    $debug = $false;
 }
 
 function checkForFile([string] $file) {
@@ -20,6 +25,11 @@ function checkForFile([string] $file) {
 
 function installPrograms() {
     if (!(checkForFile -file "programs.json")) {
+
+        if ($debug) {
+            Write-Host "## programs.json not found. Skipping programs install..."
+        }
+
         return
     }
 
@@ -29,17 +39,20 @@ function installPrograms() {
         
         $wingetExists = Get-Command 'winget' -ErrorAction SilentlyContinue;
         if (!$wingetExists) {
-            Write-Progress -Activity "Installing WinGet programs..." -CurrentOperation "Installing: WinGet"
-
-            Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
+            Write-Host "WinGet has to be installed, to use install programs with it. Head over to the 'App Installer'-Page on the Microsoft Store to install it. Then restart the powershell."
+            Exit
         }
 
         foreach ($program in $programs.winget) {
             Write-Progress -Activity "Installing WinGet programs..." -CurrentOperation "Installing: $program"
 
-            winget.exe install -e -h --id $program > $null
+            if ($debug) {
+                Write-Host "## Installing WinGet: $program"
+                winget.exe install -e -h --accept-source-agreements --accept-package-agreements --id $program
+            } else {
+                winget.exe install -e -h --accept-source-agreements --accept-package-agreements --id $program > $null
+            }
         }
-        Write-Progress -Completed True
     }
 
     if ($programs.PSObject.Properties.name -contains "choco") {
@@ -48,16 +61,27 @@ function installPrograms() {
         $chocoExists = Get-Command 'choco' -ErrorAction SilentlyContinue;
         if (!$chocoExists) {
             
-            Write-Progress -Activity "Installing Chocolatey programs..." -CurrentOperation "Installing: Chocolatey"
-            Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) > $nul
+            if ($debug) {
+                Write-Host "## Installing Chocolatey"
+                Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+            } else {
+                Write-Progress -Activity "Installing Chocolatey programs..." -CurrentOperation "Installing: Chocolatey"
+                Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) > $nul
+            }
+
         }
 
         foreach ($program in $programs.choco) {
-            Write-Progress -Activity "Installing Chocolatey programs..." -CurrentOperation "Installing: $program"
-
-            choco.exe install -y $program > $null
+            if ($debug) {
+                Write-Host "## Installing Choco: $program"
+                choco.exe install -y $program 
+            } else {
+                Write-Progress -Activity "Installing Chocolatey programs..." -CurrentOperation "Installing: $program"
+                choco.exe install -y $program > $null
+            }
         }
-        
+    }
+    if (!$debug) {
         Write-Progress -Completed True
     }
 }
@@ -80,6 +104,9 @@ function resolvePlaceholders([string]$value) {
 
 function setupLinks() {
     if (!(checkForFile -file "links.json")) {
+        if ($debug) {
+            Write-Host "## links.json not found. Skipping link setup..."
+        }
         return
     }
     $links = Get-Content "links.json" | ConvertFrom-Json
@@ -90,21 +117,30 @@ function setupLinks() {
 
         $target = resolvePlaceholders -Value $link.value;
         $target = [System.IO.Path]::GetFullPath($target);
-
-        Write-Progress -Activity "Create Folder Links..." -CurrentOperation "$source -> $target"
         
         if (![System.IO.Directory]::Exists($source) -and ![System.IO.File]::Exists($source)) {
             continue;
         }
 
-        New-Item -Path $target -ItemType SymbolicLink -Value $source -Force > $null
+        if ($debug) {
+            Write-Host "## Creating Link: $source -> $target"
+            New-Item -Path $target -ItemType SymbolicLink -Value $source -Force
+        } else {
+            Write-Progress -Activity "Create Folder Links..." -CurrentOperation "$source -> $target"
+            New-Item -Path $target -ItemType SymbolicLink -Value $source -Force > $null
+        }
 
     }
-    #Write-Progress -Completed True
+    if (!$debug) {
+        Write-Progress -Completed True
+    }
 }
 
 function runPostInstall() {
     if (!(checkForFile -file "post-install-scripts.json")) {
+        if ($debug) {
+            Write-Host "## post-install-scripts.json not found. Skipping post-install..."
+        }
         return
     }
 
@@ -117,24 +153,33 @@ function runPostInstall() {
             continue;
         }
         
-        Write-Progress -Activity "Process Post-Install..." -CurrentOperation "Current Script: $script"
+        if ($debug) {
+            Write-Host "## Process Post Install Script: $script";
+        } else {
+            Write-Progress -Activity "Process Post-Install..." -CurrentOperation "Current Script: $script"
+        }
         & $completePath
         
     }
-    Write-Progress -Completed True
+    if (!$debug) {
+        Write-Progress -Completed True
+    }
 }
 
 Write-Host "# Starting Setup"
 
 if ($runInstall) {
+    Write-Host "# Starting installing programs"
     installPrograms
 }
 
 if ($runLinks) {
+    Write-Host "# Starting setting up links"
     setupLinks
 }
 
 if ($runPostInstall) {
+    Write-Host "# Running post-install scripts"
     runPostInstall
 }
 
