@@ -1,7 +1,7 @@
 {
-	"lf": "[UserProfile]/AppData/Local/lf",
-	"terminal": "[UserProfile]/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState",
-	"blender": "[UserProfile]/AppData/Roaming/Blender Foundation/Blender/3.6",
+	"lf": "[LocalAppData]/lf",
+	"terminal": "[LocalAppData]/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState",
+	"blender": "[AppData]/Blender Foundation/Blender/3.6",
 	
 	"optolith-insider/heroes.json": "[UserProfile]/AppData/Roaming/Optolith Insider/heroes.json"
 }

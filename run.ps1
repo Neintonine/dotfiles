@@ -55,6 +55,22 @@ function installPrograms() {
     }
 }
 
+function resolvePlaceholders([string]$value) {
+    $placeholders = @{
+        "UserProfile" = "$env:USERPROFILE";
+        "LocalAppData" = "$env:LOCALAPPDATA";
+        "AppData" = "$env:APPDATA";
+        "ProgramFiles" = "$env:PROGRAMFILES";
+    }
+
+    $target = $value;
+    foreach($placeholder in $placeholders.GetEnumerator())
+    {
+        $target = $target.Replace("[" + $placeholder.name + "]", $placeholder.value);
+    }
+    return $target;
+}
+
 function setupLinks() {
     if (!(checkForFile -file "links.json")) {
         return
@@ -65,8 +81,8 @@ function setupLinks() {
         $source = "./settings/" + $link.name
         $source =  [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $source));
 
-        $target = $link.value.replace("[UserProfile]", "$env:USERPROFILE")
-        $target = [System.IO.Path]::GetFullPath($target)
+        $target = resolvePlaceholders -Value $link.value;
+        $target = [System.IO.Path]::GetFullPath($target);
 
         Write-Progress -Activity "Create Folder Links..." -CurrentOperation "$source -> $target"
         
@@ -77,7 +93,7 @@ function setupLinks() {
         New-Item -Path $target -ItemType SymbolicLink -Value $source -Force > $null
 
     }
-    Write-Progress -Completed True
+    #Write-Progress -Completed True
 }
 
 function runPostInstall() {
